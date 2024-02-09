@@ -1,0 +1,31 @@
+package com.eminyilmazz.casebe.entity.dto;
+
+import com.eminyilmazz.casebe.entity.Location;
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class LocationDTO {
+    private double longitude;
+    private double latitude;
+    private double radius;
+
+    public static LocationDTO fromEntity(Location location) {
+        return LocationDTO.builder()
+                .longitude(location.getLongitude())
+                .latitude(location.getLatitude())
+                .radius(location.getRadius())
+                .build();
+    }
+
+    public Location toEntity() {
+        return Location.builder()
+                .longitude(this.longitude)
+                .latitude(this.latitude)
+                .radius(this.radius)
+                .build();
+    }
+}
