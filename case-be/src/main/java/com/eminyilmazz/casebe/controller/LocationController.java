@@ -13,8 +13,8 @@ public class LocationController {
     @Autowired
     LocationService locationService;
 
-    @GetMapping(value = "/get", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public void get(@RequestParam(name = "long") double longitude, @RequestParam(name = "lat") double latitude, @RequestParam(name = "rad", required = false, defaultValue = "0.0") double rad) {
+    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    public void get(@RequestParam(name = "long") double longitude, @RequestParam(name = "lat") double latitude, @RequestParam(name = "rad", required = false, defaultValue = "1000.0") double rad) {
         locationService.get(LocationDTO.builder()
                 .longitude(longitude)
                 .latitude(latitude)
