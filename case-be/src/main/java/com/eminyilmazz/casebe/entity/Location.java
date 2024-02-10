@@ -1,9 +1,11 @@
 package com.eminyilmazz.casebe.entity;
 
+import com.eminyilmazz.casebe.entity.dto.PlaceDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "location")
@@ -23,4 +25,7 @@ public class Location implements Serializable {
     private double latitude;
     @Column(name = "radius")
     private double radius;
+    @Column(name = "places")
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    private List<Place> places;
 }
