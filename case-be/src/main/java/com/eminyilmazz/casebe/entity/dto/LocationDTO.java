@@ -11,7 +11,7 @@ import lombok.*;
 public class LocationDTO {
     private double longitude;
     private double latitude;
-    private double radius;
+    private int radius;
 
     public static LocationDTO fromEntity(Location location) {
         return LocationDTO.builder()

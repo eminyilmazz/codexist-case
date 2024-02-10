@@ -24,7 +24,7 @@ public class Location implements Serializable {
     @Column(name = "latitude")
     private double latitude;
     @Column(name = "radius")
-    private double radius;
+    private int radius;
     @Column(name = "places")
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     private List<Place> places;

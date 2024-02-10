@@ -27,27 +27,27 @@ public class APIService {
     private RestTemplate restTemplate;
     private static final Logger logger = LoggerFactory.getLogger(APIService.class);
 
-    public ResponseEntity<GoogleResponse> searchNearbyPlaces(double latitude, double longitude, int radius) {
+    public GoogleResponse searchNearbyPlaces(double latitude, double longitude, int radius) {
         URI uri = UriComponentsBuilder.fromHttpUrl(GOOGLE_PLACES_API_URL)
-                .queryParam("latitude", latitude)
-                .queryParam("longitude", longitude)
+                .queryParam("location", longitude + "," + latitude)
                 .queryParam("radius", radius)
+                .queryParam("key", API_KEY)
                 .build().toUri();
-
+        logger.debug("generated uri: {}", uri.toASCIIString());
         HttpHeaders header = new HttpHeaders();
         header.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
 
         HttpEntity<String> entity = new HttpEntity<>(header);
 
         ResponseEntity<GoogleResponse> response = restTemplate.exchange(uri, HttpMethod.GET, entity, GoogleResponse.class);
-
+        logger.debug("Response received - Status code: {}", response.getStatusCode());
         try {
             Util.validateResponse(response);
         } catch (JsonProcessingException e) {
             logger.error("error occurred validating response!");
             throw new UnknownErrorException(e.getMessage());
         }
-        return response;
+        return response.getBody();
     }
 
 }

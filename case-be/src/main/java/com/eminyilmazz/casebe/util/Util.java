@@ -6,18 +6,15 @@ import com.eminyilmazz.casebe.exception.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public class Util {
     private static final ObjectMapper mapper = new ObjectMapper();
-
-    public static List<PlaceDTO> parseResponse(String body) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        GoogleResponse response = mapper.readValue(body, GoogleResponse.class);
-        return response.getResults();
-    }
+    private static final Logger logger = LoggerFactory.getLogger(Util.class);
 
     public static void validateResponse(ResponseEntity<GoogleResponse> response) throws JsonProcessingException {
         JsonNode responseBody = mapper.readTree(mapper.writeValueAsString(response.getBody()));
@@ -26,10 +23,12 @@ public class Util {
         }
 
         String status = responseBody.get("status").asText();
+        logger.debug("status: {}", status);
 
         if (status.equalsIgnoreCase("OK")) return;
 
-        String errorMessage = responseBody.get("error_message").asText(null);
+        String errorMessage = responseBody.has("error_message") ? responseBody.get("error_message").asText() : null;
+        logger.debug("error message: {}", errorMessage);
 
         switch (status) {
             case "OK":
