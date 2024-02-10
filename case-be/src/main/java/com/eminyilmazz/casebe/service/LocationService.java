@@ -31,12 +31,13 @@ public class LocationService {
             } catch (JsonProcessingException e) {
                 logger.error("error getting places!");
                 ExceptionUtils.printRootCauseStackTrace(e);
+                return null;
             }
         } else {
-            //TODO: get from db
+            return locationRepository.findByLongitudeAndLongitudeAndRadius(dto.getLatitude(), dto.getLongitude(), dto.getRadius()).getPlaces().stream().map(PlaceDTO::fromEntity).toList();
         }
-        return null;
     }
+
     private void save(LocationDTO dto, List<PlaceDTO> places) {
         Location location = dto.toEntity();
         locationRepository.save(location);

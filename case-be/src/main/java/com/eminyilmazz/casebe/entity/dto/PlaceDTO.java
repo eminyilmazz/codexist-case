@@ -4,15 +4,13 @@ import com.eminyilmazz.casebe.entity.Place;
 import com.eminyilmazz.casebe.entity.model.OpeningHours;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PlaceDTO {
     @JsonProperty("business_status")
@@ -32,31 +30,28 @@ public class PlaceDTO {
     @JsonProperty("vicinity")
     private String vicinity;
 
-    public PlaceDTO(String businessStatus, String name, String placeId, Integer priceLevel, Double rating, Integer userRatingsTotal, String vicinity) {
-    }
-
     public static PlaceDTO fromEntity(Place place) {
-        return new PlaceDTO(
-                place.getBusinessStatus(),
-                place.getName(),
-                place.getPlaceId(),
-                place.getPriceLevel(),
-                place.getRating(),
-                place.getUserRatingsTotal(),
-                place.getVicinity()
-        );
+        return PlaceDTO.builder()
+                .businessStatus(place.getBusinessStatus())
+                .name(place.getName())
+                .placeId(place.getPlaceId())
+                .priceLevel(place.getPriceLevel())
+                .rating(place.getRating())
+                .userRatingsTotal(place.getUserRatingsTotal())
+                .vicinity(place.getVicinity())
+                .build();
     }
 
     public Place toEntity() {
-        Place place = new Place();
-        place.setBusinessStatus(this.businessStatus);
-        place.setName(this.name);
-        place.setPlaceId(this.placeId);
-        place.setPriceLevel(this.priceLevel);
-        place.setRating(this.rating);
-        place.setUserRatingsTotal(this.userRatingsTotal);
-        place.setVicinity(this.vicinity);
-        return place;
+        return Place.builder()
+                .businessStatus(this.businessStatus)
+                .name(this.name)
+                .placeId(this.placeId)
+                .priceLevel(this.priceLevel)
+                .rating(this.rating)
+                .userRatingsTotal(this.userRatingsTotal)
+                .vicinity(this.vicinity)
+                .build();
     }
 }
 
