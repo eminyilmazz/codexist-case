@@ -11,6 +11,8 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +25,7 @@ public class LocationService {
     private PlaceService placeService;
     private static final Logger logger = LoggerFactory.getLogger(LocationService.class);
 
+    @Cacheable(value = "places", key = "#dto.toString()", cacheManager = "cacheManager")
     public List<PlaceDTO> get(LocationDTO dto) {
         final boolean isValidCoordinate = Util.validateCoordinates(dto.getLongitude(), dto.getLatitude());
         if (!isValidCoordinate) {
@@ -49,5 +52,9 @@ public class LocationService {
         Location location = dto.toEntity();
         locationRepository.save(location);
         placeService.save(places, location);
+    }
+
+    @CacheEvict(value = "places", key = "#dto.toString()", cacheManager = "cacheManager")
+    public void evictCache(LocationDTO dto) {
     }
 }

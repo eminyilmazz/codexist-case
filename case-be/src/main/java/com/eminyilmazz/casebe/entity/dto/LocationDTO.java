@@ -28,4 +28,13 @@ public class LocationDTO {
                 .radius(this.radius)
                 .build();
     }
+
+    @Override
+    public String toString() {
+        return "LocationDTO{" +
+                "longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", radius=" + radius +
+                '}';
+    }
 }

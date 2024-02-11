@@ -6,13 +6,15 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PlaceDTO {
+public class PlaceDTO implements Serializable {
     @JsonProperty("business_status")
     private String businessStatus;
     @JsonProperty("name")
