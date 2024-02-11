@@ -1,0 +1,31 @@
+version: "3.1"
+services:
+  srvcodexistbe:
+    image: eminyilmazz/codexist-be:latest
+    depends_on:
+      - redis
+      - postgresql
+    ports:
+      - "8070:8070"
+    environment:
+      - "SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql:5432/codexist-db"
+    links:
+      - redis
+      - postgresql
+    volumes:
+      - "./src/main/resources/application.properties:/app/resources/application.properties"
+      - "./src/main/resources/dev/application.properties:/app/resources/dev/application.properties"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  postgresql:
+    image: postgres:15-alpine
+    environment:
+      - "POSTGRES_DB=codexist-db"
+      - "POSTGRES_USER=postgres"
+      - "POSTGRES_PASSWORD=admin"
+    ports:
+      - "5432:5432"
