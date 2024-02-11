@@ -45,4 +45,8 @@ public class Util {
                 throw new UnknownErrorException(errorMessage != null ? errorMessage : "Unknown error occurred.");
         }
     }
+
+    public static boolean validateCoordinates(double longitude, double latitude) {
+        return longitude <= 180. && longitude >= -180. && latitude <= 90. && latitude >= -90.;
+    }
 }

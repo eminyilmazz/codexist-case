@@ -3,7 +3,9 @@ package com.eminyilmazz.casebe.service;
 import com.eminyilmazz.casebe.entity.Location;
 import com.eminyilmazz.casebe.entity.dto.LocationDTO;
 import com.eminyilmazz.casebe.entity.dto.PlaceDTO;
+import com.eminyilmazz.casebe.exception.InvalidRequestException;
 import com.eminyilmazz.casebe.repository.LocationRepository;
+import com.eminyilmazz.casebe.util.Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
@@ -22,6 +24,11 @@ public class LocationService {
     private static final Logger logger = LoggerFactory.getLogger(LocationService.class);
 
     public List<PlaceDTO> get(LocationDTO dto) {
+        final boolean isValidCoordinate = Util.validateCoordinates(dto.getLongitude(), dto.getLatitude());
+        if (!isValidCoordinate) {
+            throw new InvalidRequestException("Invalid coordinates!");
+        }
+
         boolean doesExist = locationRepository.existsByLatitudeAndLongitudeAndRadius(dto.getLatitude(), dto.getLongitude(), dto.getRadius());
         if (!doesExist) {
             try {
