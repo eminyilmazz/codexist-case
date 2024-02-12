@@ -6,10 +6,8 @@ $(document).ready(function() {
     const longitude = $('#longitude').val();
     const latitude = $('#latitude').val();
     const radius = $('#radius').val();
-  
-    const baseUrl = process.env.BASE_URL || 'http://127.0.0.1:8070';
 
-    const url = `${baseUrl}/get?long=${longitude}&lat=${latitude}&rad=${radius}`;
+    const url = `https://codexist-be-hqjbbnwqeq-ey.a.run.app/get?long=${longitude}&lat=${latitude}&rad=${radius}`;
   
     $.ajax({
       url: url,
