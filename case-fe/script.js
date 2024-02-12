@@ -7,17 +7,21 @@ $(document).ready(function() {
     const latitude = $('#latitude').val();
     const radius = $('#radius').val();
 
-    const url = `https://codexist-be-hqjbbnwqeq-ey.a.run.app/get?long=${longitude}&lat=${latitude}&rad=${radius}`;
+    const url = `http://127.0.0.1:8070/get?long=${longitude}&lat=${latitude}&rad=${radius}`;
   
     $.ajax({
       url: url,
       type: 'GET',
       dataType: 'json',
-      success: function(data) {
-        displayPlaces(data);
+      success: function(data, textStatus, xhr) {
+        if (xhr.status === 204) {
+          handleError(xhr)
+        } else {
+          displayPlaces(data);
+        }
       },
       error: function(xhr, status, error) {
-        console.error('Error fetching:', error);
+        handleError(xhr)
       }
     });
   }
@@ -52,4 +56,31 @@ $(document).ready(function() {
       resultDiv.appendChild(ul);
     }
   }
+
+  function handleError(xhr) {
+    const status = parseInt(xhr.status);
+    console.log(status)
+    const errorMessage = xhr.responseText;
+
+    const resultDiv = document.getElementById('result');
+    resultDiv.innerText = '';
+
+    $('#result').html(resultDiv);
+    $('#result').show();
+    
+    switch (status) {
+        case 204:
+            resultDiv.innerText = 'Search returned no results.';
+            break;
+        case 400:
+        case 403:
+        case 429:
+        case 500:
+          resultDiv.innerText = errorMessage;
+          break;
+        default:
+          resultDiv.innerText = 'Error: ' + errorMessage;
+          break;
+    }
+  } 
   
