@@ -7,7 +7,7 @@ $(document).ready(function() {
     const latitude = $('#latitude').val();
     const radius = $('#radius').val();
 
-    const url = `http://127.0.0.1:8070/get?long=${longitude}&lat=${latitude}&rad=${radius}`;
+    const url = `https://codexist-be-hqjbbnwqeq-ey.a.run.app/get?long=${longitude}&lat=${latitude}&rad=${radius}`;
   
     $.ajax({
       url: url,
