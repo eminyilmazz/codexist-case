@@ -25,6 +25,7 @@ public class APIService {
 
     @Autowired
     private RestTemplate restTemplate;
+
     private static final Logger logger = LoggerFactory.getLogger(APIService.class);
 
     public GoogleResponse searchNearbyPlaces(double latitude, double longitude, int radius) {

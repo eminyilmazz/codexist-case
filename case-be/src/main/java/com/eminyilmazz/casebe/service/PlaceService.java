@@ -2,11 +2,10 @@ package com.eminyilmazz.casebe.service;
 
 import com.eminyilmazz.casebe.entity.Location;
 import com.eminyilmazz.casebe.entity.Place;
-import com.eminyilmazz.casebe.entity.model.GoogleResponse;
-import com.eminyilmazz.casebe.repository.PlaceRepository;
 import com.eminyilmazz.casebe.entity.dto.LocationDTO;
 import com.eminyilmazz.casebe.entity.dto.PlaceDTO;
-import com.eminyilmazz.casebe.util.Util;
+import com.eminyilmazz.casebe.entity.model.GoogleResponse;
+import com.eminyilmazz.casebe.repository.PlaceRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class PlaceService {

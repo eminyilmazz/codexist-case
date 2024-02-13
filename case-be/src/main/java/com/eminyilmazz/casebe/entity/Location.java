@@ -1,6 +1,5 @@
 package com.eminyilmazz.casebe.entity;
 
-import com.eminyilmazz.casebe.entity.dto.PlaceDTO;
 import jakarta.persistence.*;
 import lombok.*;
 
