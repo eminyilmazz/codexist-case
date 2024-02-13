@@ -1,9 +1,9 @@
 const app = Vue.createApp({
     data() {
       return {
-        longitude: 'default_longitude_value',
-        latitude: 'default_latitude_value',
-        radius: 'default_radius_value',
+        longitude: '',
+        latitude: '',
+        radius: '',
         places: [],
         errorMessage: '',
         showResult: false,
