@@ -27,7 +27,7 @@ public class PlaceService {
     }
 
     public List<PlaceDTO> getPlaces(LocationDTO dto) throws JsonProcessingException {
-        GoogleResponse resp = apiService.searchNearbyPlaces(dto.getLatitude(), dto.getLongitude(), (int) dto.getRadius());
+        GoogleResponse resp = apiService.searchNearbyPlaces(dto.getLatitude(), dto.getLongitude(), dto.getRadius());
         List<PlaceDTO> places = resp.getResults();
         logger.info(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(places));
         return places;
