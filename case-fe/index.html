@@ -7,24 +7,38 @@
 <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<div class="container">
+<div id="app" class="container">
   <div class="input-group">
     <label for="longitude">Longitude:</label>
-    <input type="text" id="longitude" placeholder="Enter longitude">
+    <input v-model="longitude" type="text" id="longitude" placeholder="Enter longitude">
   </div>
   <div class="input-group">
     <label for="latitude">Latitude:</label>
-    <input type="text" id="latitude" placeholder="Enter latitude">
+    <input v-model="latitude" type="text" id="latitude" placeholder="Enter latitude">
   </div>
   <div class="input-group">
     <label for="radius">Radius (meters):</label>
-    <input type="text" id="radius" placeholder="Enter radius">
+    <input v-model="radius" type="text" id="radius" placeholder="Enter radius">
   </div>
-  <button id="findButton">Find Places</button>
-  <div id="result" style="display:none;"></div>
+  <button @click="fetchPlaces" id="findButton">Find Places</button>
+  <div id="result" v-show="showResult">
+    <ul v-if="places && places.length" class="places-list">
+        <li v-for="place in places" class="place">
+          <template v-if="place.name"><strong>Name:</strong> {{ place.name }}<br></template>
+          <template v-if="place.vicinity"><strong>Vicinity:</strong> {{ place.vicinity }}<br></template>
+          <template v-if="place.rating"><strong>Rating:</strong> {{ place.rating }}<br></template>
+          <template v-if="place.user_ratings_total"><strong>User Ratings Total:</strong> {{ place.user_ratings_total }}<br></template>
+          <template v-if="place.price_level"><strong>Price Level:</strong> {{ place.price_level }}<br></template><br>
+        </li>
+      </ul>
+  </div>
+  <div id="error" v-show="showError">
+    <p v-if="errorMessage">{{ errorMessage }}</p>
+  </div>
 </div>
 
+<script src="https://unpkg.com/vue@3.4.19"></script>
 <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-<script src="script.js"></script>
+<script src="app.js"></script>
 </body>
 </html>
