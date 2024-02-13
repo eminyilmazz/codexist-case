@@ -29,7 +29,7 @@ public class APIService {
 
     public GoogleResponse searchNearbyPlaces(double latitude, double longitude, int radius) {
         URI uri = UriComponentsBuilder.fromHttpUrl(GOOGLE_PLACES_API_URL)
-                .queryParam("location", longitude + "," + latitude)
+                .queryParam("location", latitude + "," + longitude)
                 .queryParam("radius", radius)
                 .queryParam("key", API_KEY)
                 .build().toUri();
