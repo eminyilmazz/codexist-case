@@ -29,7 +29,7 @@ public class LocationService {
     public List<PlaceDTO> get(LocationDTO dto) {
         final boolean isValidCoordinate = Util.validateCoordinates(dto.getLongitude(), dto.getLatitude());
         if (!isValidCoordinate) {
-            throw new InvalidRequestException("Invalid coordinates!");
+            throw new InvalidRequestException("Invalid coordinates! Longitude must be between -180 and 180 and latitude must be between -90 and 90.");
         }
 
         boolean doesExist = locationRepository.existsByLatitudeAndLongitudeAndRadius(dto.getLatitude(), dto.getLongitude(), dto.getRadius());
