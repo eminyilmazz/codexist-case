@@ -19,9 +19,9 @@ const app = Vue.createApp({
             return;
         }
 
-        const url = `https://codexist-be-hqjbbnwqeq-ey.a.run.app/get?long=${this.longitude}&lat=${this.latitude}`;
+        let url = `https://codexist-be-hqjbbnwqeq-ey.a.run.app/get?long=${this.longitude}&lat=${this.latitude}`;
         if (this.radius) {
-            url = url + '&rad=${this.radius}';
+            url = url + `&rad=${this.radius}`;
         }
 
         $.ajax({
