@@ -7,6 +7,7 @@ import com.eminyilmazz.casebe.exception.InvalidRequestException;
 import com.eminyilmazz.casebe.repository.LocationRepository;
 import com.eminyilmazz.casebe.util.Util;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import java.util.Collections;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,7 +42,7 @@ public class LocationService {
             } catch (JsonProcessingException e) {
                 logger.error("error getting places!");
                 ExceptionUtils.printRootCauseStackTrace(e);
-                return null;
+                return Collections.emptyList();
             }
         } else {
             return locationRepository.findByLongitudeAndLongitudeAndRadius(dto.getLatitude(), dto.getLongitude(), dto.getRadius()).getPlaces().stream().map(PlaceDTO::fromEntity).toList();
