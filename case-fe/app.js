@@ -12,6 +12,13 @@ const app = Vue.createApp({
     },
     methods: {
       fetchPlaces() {
+        if (!this.latitude || !this.longitude) {
+            this.errorMessage = 'Longitude or latitude fields cannot be empty!';
+            this.showError = true;
+            this.showResult = false;
+            return;
+        }
+
         const url = `http://127.0.0.1:8070/get?long=${this.longitude}&lat=${this.latitude}&rad=${this.radius}`;
         $.ajax({
           url: url,
