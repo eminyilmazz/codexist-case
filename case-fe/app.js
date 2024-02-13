@@ -19,7 +19,7 @@ const app = Vue.createApp({
             return;
         }
 
-        const url = `http://127.0.0.1:8070/get?long=${this.longitude}&lat=${this.latitude}&rad=${this.radius}`;
+        const url = `https://codexist-be-hqjbbnwqeq-ey.a.run.app/get?long=${this.longitude}&lat=${this.latitude}&rad=${this.radius}`;
         $.ajax({
           url: url,
           type: 'GET',

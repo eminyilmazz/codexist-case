@@ -10,15 +10,15 @@
 <div id="app" class="container">
   <div class="input-group">
     <label for="longitude">Longitude:</label>
-    <input v-model="longitude" type="text" id="longitude" placeholder="Enter longitude">
+    <input v-model="longitude" type="text" id="longitude" placeholder="e.g., 40.7484">
   </div>
   <div class="input-group">
     <label for="latitude">Latitude:</label>
-    <input v-model="latitude" type="text" id="latitude" placeholder="Enter latitude">
+    <input v-model="latitude" type="text" id="latitude" placeholder="e.g., -40.7484">
   </div>
   <div class="input-group">
     <label for="radius">Radius (meters):</label>
-    <input v-model="radius" type="text" id="radius" placeholder="Enter radius">
+    <input v-model="radius" type="text" id="radius" placeholder="e.g., 2500">
   </div>
   <button @click="fetchPlaces" id="findButton">Find Places</button>
   <div id="result" v-show="showResult">
