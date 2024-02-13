@@ -19,7 +19,11 @@ const app = Vue.createApp({
             return;
         }
 
-        const url = `https://codexist-be-hqjbbnwqeq-ey.a.run.app/get?long=${this.longitude}&lat=${this.latitude}&rad=${this.radius}`;
+        const url = `https://codexist-be-hqjbbnwqeq-ey.a.run.app/get?long=${this.longitude}&lat=${this.latitude}`;
+        if (this.radius) {
+            url = url + '&rad=${this.radius}';
+        }
+
         $.ajax({
           url: url,
           type: 'GET',
